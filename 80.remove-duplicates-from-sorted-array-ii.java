@@ -13,7 +13,6 @@ class Solution {
         int count = 0;
         int currNum = nums[0];
         for(int i = 1; i<nums.length; i++){
-            //System.out.println("i: " + i + " nums[i]: " + nums[i]);
             if(nums[i] == currNum && nums[i] != Integer.MAX_VALUE){
                 count++;
                 if(count >= 2){
