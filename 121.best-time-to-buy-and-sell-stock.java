@@ -16,6 +16,5 @@ class Solution {
         return maxProfit;
     }
 }
-
 // @lc code=end
 
