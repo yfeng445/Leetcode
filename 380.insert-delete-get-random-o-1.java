@@ -7,12 +7,26 @@
 // @lc code=start
 class RandomizedSet {
 
+    Object head = null;
+    Object next = null;
+
     public RandomizedSet() {
-        
+        RandomizedSet set = new RandomizedSet();
     }
     
     public boolean insert(int val) {
-        
+        if(this.head == null){
+            this.head = val;
+            return true;
+        }
+        else{
+            Object curr = this.head;
+            while(curr!=null){
+                if((int)curr == val){
+                    
+                }
+            }
+        }
     }
     
     public boolean remove(int val) {
@@ -23,6 +37,7 @@ class RandomizedSet {
         
     }
 }
+
 
 /**
  * Your RandomizedSet object will be instantiated and called as such:
