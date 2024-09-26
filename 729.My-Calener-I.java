@@ -8,7 +8,7 @@
 import java.util.ArrayList;
 class MyCalendar {
 
-    ArrayList<int[2]> records;
+    ArrayList<int[]> records;
     
     public MyCalendar() {
         records = new ArrayList<>();
@@ -16,7 +16,10 @@ class MyCalendar {
     
     public boolean book(int start, int end) {
         if(start<end) return false;
-        records.app
+        if(records.size()==0){
+            records.add(new int[]{start, end});
+        }
+        records.add(new int[]{start, end});
     }
 }
 
