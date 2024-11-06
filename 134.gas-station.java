@@ -5,35 +5,29 @@
  */
 
 // @lc code=start
+import java.util.Arrays;
+
 class Solution {
     public int canCompleteCircuit(int[] gas, int[] cost) {
-        // check if we could finish the trip
-        int canFinish = 0;
-        for(int i = 0; i<gas.length; i++){
-            canFinish+=gas[i];
-            canFinish-=cost[i];
+        if (Arrays.stream(gas).sum() < Arrays.stream(cost).sum()) {
+            return -1;
         }
-        if (canFinish<0){
-           return -1; 
-        } 
-        else{ // can finish, find the gasStation index
-            int index = 0; 
-            boolean canComplete = false;
-            while(!canComplete){
-                int gasRemain = gas[index];
-                for(int i = 0; i<gas.length; i++){
-                    gasRemain -= cost[i];
-                    if(gasRemain<0){ //cannot reach next gas station, go to next try
-                        index++;
-                        break;
-                    }
-                    else{
-                        gasRemain += gas[i+1];
-                    }
-                }
+
+        int currentRemain = 0;
+        int start = 0;
+        for (int i = 0; i < gas.length; i++) {
+            int remain = gas[i] - cost[i];
+            currentRemain += remain;
+
+            if (currentRemain < 0) {
+                start = i + 1;
+                currentRemain = 0;
             }
         }
+
+        return start;
     }
 }
+
 // @lc code=end
 

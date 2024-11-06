@@ -5,6 +5,8 @@
  */
 
 // @lc code=start
+import java.util.ArrayList;
+
 class RandomizedSet {
 
     Object head = null;
