@@ -9,34 +9,37 @@ import java.util.ArrayList;
 
 class RandomizedSet {
 
-    Object head = null;
-    Object next = null;
+    ArrayList<Integer> rs= new ArrayList<>();
 
     public RandomizedSet() {
-        RandomizedSet set = new RandomizedSet();
+         
     }
     
     public boolean insert(int val) {
-        if(this.head == null){
-            this.head = val;
-            return true;
+        if(rs.contains(val)){
+            return false;
         }
         else{
-            Object curr = this.head;
-            while(curr!=null){
-                if((int)curr == val){
-                    
-                }
-            }
+            rs.add(val);
+            return true;
         }
     }
     
     public boolean remove(int val) {
-        
+        if(!rs.contains(val))return false;
+        else{
+            for(int i = 0; i<rs.size(); i++){
+                if(val == rs.get(i)){
+                    rs.remove(i);
+                    break;
+                }
+            }
+            return true;
+        }
     }
     
     public int getRandom() {
-        
+        return rs.get((int) (Math.random() * rs.size()));
     }
 }
 
