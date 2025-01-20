@@ -26,9 +26,24 @@ class Solution {
             }
         }
 
-        Collections.sort(map, (a, b) -> Integer.compare(, numArrow))
+        System.out.println(map.toString());
+        System.out.println(getMaxFreqPos(map));
+
+        //Collections.sort(map, (a, b) -> Integer.compare(, numArrow))
         
         return numArrow;
+    }
+
+    public int getMaxFreqPos(HashMap<Integer, Integer> map){
+        int maxFreq = 0;
+        int maxPos = 0;
+        for (HashMap.Entry<Integer, Integer> en : map.entrySet()) {
+            if(en.getValue()>maxFreq){
+                maxPos = en.getKey();
+                maxFreq = en.getValue();
+            }
+        }
+        return maxPos;
     }
 }
 // @lc code=end
