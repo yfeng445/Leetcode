@@ -6,6 +6,8 @@
 
 // @lc code=start
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,68 +15,44 @@ import java.util.List;
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
-        List<List<Integer>> lst = new ArrayList<>();
+        List<Integer> vals = new ArrayList<>();
+        for(int i : nums){
+            vals.add(i);
+        }
+        //System.out.println(vals.toString());
 
-        // edge case 1: list has less than 3 int
-        if(nums.length<3) return lst;
-        // edge case 2: minSum>0 || maxSum<0
-        if(((nums[0]+nums[1]+nums[2])>0)||((nums[nums.length-1]+nums[nums.length-2]+nums[nums.length-3])<0)) return lst;
-
+        List<List<Integer>> rtn = new ArrayList<>();
         int boundary = 0;
         for(int i = 0; i<nums.length; i++){
-            if(nums[i]>0){
+            if(nums[i] >= 0){
                 boundary = i;
                 break;
             } 
         }
 
-        int n = 0;
-        int p = nums.length-1;
-        System.out.println(printArr(nums));
-        while(n<=boundary && p>=boundary){
-            System.out.println(
-                "Boundary = "+boundary+
-                ", n = "+n+
-                ", p = "+p);
-            
-            for(int i = n+1; i<p; i++){
-                if(nums[n]+nums[i]+nums[p] == 0){
-                    System.out.println("Found: "+"n="+n+", i="+i+", p="+p);
-                    ArrayList<Integer> tmp = new ArrayList<>();
-                    tmp.add(nums[n]);
-                    tmp.add(nums[i]);
-                    tmp.add(nums[p]);
-                    lst.add(tmp);
-                    break;
+        // System.out.println(vals.toString() + boundary);
+
+        for(int i = 0; i<boundary; i++){
+            for(int j = boundary; j<nums.length; j++){
+                for(int k = i + 1; k<j; k++){
+                    if(nums[i] + nums[j] + nums[k] == 0){
+                        List<Integer> tmp = new ArrayList<>();
+                        tmp.add(nums[i]);
+                        tmp.add(nums[k]);
+                        tmp.add(nums[j]);
+                        rtn.add(tmp);
+                        break;
+                    }
                 }
             }
-
-            if(nums[n]+nums[p]<0){
-                n++;
-            }
-            else{
-                p--;
-            }
         }
 
-        for(int i = 0; i<lst.size()-1; i++){
-            if(lst.get(i).equals(lst.get(i+1))){
-                lst.remove(i);
-            }
-        }
+        Set<List<Integer>> tmp = new HashSet<>(rtn);
+        List<List<Integer>> returnList = new ArrayList<List<Integer>>(tmp);
 
-        return lst;
+
+        return returnList;
     }
-
-    public String printArr(int[] input){
-        StringBuilder sb = new StringBuilder("");
-        for(int i = 0; i<input.length; i++){
-            sb.append(String.valueOf(input[i]));
-            sb.append(", ");
-        }
-        return sb.toString();
-    }
-
 }
 // @lc code=end
 
