@@ -5,9 +5,6 @@
  */
 
 // @lc code=start
-
-import java.util.HashSet;
-import java.util.Set;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,43 +12,28 @@ import java.util.List;
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
-        List<Integer> vals = new ArrayList<>();
-        for(int i : nums){
-            vals.add(i);
-        }
-        //System.out.println(vals.toString());
+        List<List<Integer>> result = new ArrayList<>();
 
-        List<List<Integer>> rtn = new ArrayList<>();
-        int boundary = 0;
-        for(int i = 0; i<nums.length; i++){
-            if(nums[i] >= 0){
-                boundary = i;
-                break;
-            } 
-        }
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue; 
 
-        // System.out.println(vals.toString() + boundary);
-
-        for(int i = 0; i<boundary; i++){
-            for(int j = boundary; j<nums.length; j++){
-                for(int k = i + 1; k<j; k++){
-                    if(nums[i] + nums[j] + nums[k] == 0){
-                        List<Integer> tmp = new ArrayList<>();
-                        tmp.add(nums[i]);
-                        tmp.add(nums[k]);
-                        tmp.add(nums[j]);
-                        rtn.add(tmp);
-                        break;
-                    }
+            int left = i + 1, right = nums.length - 1;
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                if (sum == 0) {
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    while (left < right && nums[left] == nums[left + 1]) left++;
+                    while (left < right && nums[right] == nums[right - 1]) right--;
+                    left++;
+                    right--;
+                } else if (sum < 0) {
+                    left++;
+                } else {
+                    right--;
                 }
             }
         }
-
-        Set<List<Integer>> tmp = new HashSet<>(rtn);
-        List<List<Integer>> returnList = new ArrayList<List<Integer>>(tmp);
-
-
-        return returnList;
+        return result; 
     }
 }
 // @lc code=end
