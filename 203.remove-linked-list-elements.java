@@ -44,12 +44,10 @@ class Solution {
                 if(head.next.val == val){
                     head.next = head.next.next;
                 }
-            }
-            if(head.next.val != val){
-                head = head.next;   
-            }
-            
-             
+                else{
+                   head = head.next;  
+                }
+            }           
         }
         
         return cpHead;
