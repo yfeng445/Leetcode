@@ -15,34 +15,37 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-
-import java.util.ArrayList;
-
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
-        if(head == null) return null;
+        if(head == null) return head;
         if(head.next == null) return head;
 
-        ListNode cpHead = head;
-        
-        while(head.next!=null){
-            System.out.println(head.val);
-            boolean flag = false;
-            if(head.next.next!=null){
-                boolean duplicate = false;
-                if(head.next.val == head.next.next.val){
-                    duplicate = true;
-                    flag = true;
+        ListNode fakeHead = new ListNode();
+        ListNode rtn = fakeHead;
+        fakeHead.next = head;
+  
+        while(fakeHead.next.next != null){
+            if(fakeHead.next.val == fakeHead.next.next.val){
+                ListNode tmp = fakeHead.next;
+                boolean update = false;
+                while(tmp.next != null){
+                    if(tmp.val != tmp.next.val){
+                        fakeHead.next = tmp.next;
+                        update = true;
+                        break;
+                    }
+                    tmp = tmp.next;
                 }
-                while(duplicate){
-                    System.out.println("DUPLICATE AFTER: " + head.val);
-                    head.next = head.next.next;
-                    if(head.next.next.next == null || head.next.next.next.val != head.next.next.val) duplicate = false;
+                if(!update){ // end with series of same value
+                    fakeHead.next = null;
+                    return rtn.next;
                 }
             }
-            if(!flag) head = head.next;
+            else{
+               fakeHead = fakeHead.next; 
+            }   
         }
-        return cpHead;
+        return rtn.next;
     }
 }
 // @lc code=end
