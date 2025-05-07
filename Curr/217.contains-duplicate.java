@@ -6,9 +6,6 @@
 
 // @lc code=start
 
-import java.util.ArrayList;
-
-
 class Solution {
     public boolean containsDuplicate(int[] nums) {
         int m = 100003;
