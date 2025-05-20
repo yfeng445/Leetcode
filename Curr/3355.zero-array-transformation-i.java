@@ -1,3 +1,11 @@
+/*
+ * @lc app=leetcode id=3355 lang=java
+ *
+ * [3355] Zero Array Transformation I
+ */
+
+// @lc code=start
+
 class Solution {
     public boolean isZeroArray(int[] nums, int[][] queries) {
         int[] diffArr = new int[nums.length];
@@ -20,3 +28,5 @@ class Solution {
         return true;
     }
 }
+// @lc code=end
+
